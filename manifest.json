@@ -1,0 +1,13 @@
+{
+  "name": "Jisho Lookup Tracker",
+  "version": "0.1",
+  "description": "Track your lookup history for jisho.org",
+  "content_scripts": [
+    {
+      "matches": ["*://jisho.org/*"],
+      "js": ["script.js"]
+    }
+  ],
+  "permissions": ["activeTab"],
+  "manifest_version": 2
+}
