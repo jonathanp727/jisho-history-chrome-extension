@@ -9,5 +9,6 @@
     }
   ],
   "permissions": ["activeTab"],
+  "web_accessible_resources": ["style.css"],
   "manifest_version": 2
 }
