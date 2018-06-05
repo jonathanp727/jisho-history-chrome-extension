@@ -1,5 +1,6 @@
 let entries = document.getElementsByClassName("concept_light-readings");
 
+// Add css file
 var fileref = document.createElement("link");
 fileref.setAttribute("rel", "stylesheet");
 fileref.setAttribute("type", "text/css");

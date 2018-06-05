@@ -2,13 +2,20 @@
   "name": "Jisho Lookup Tracker",
   "version": "0.1",
   "description": "Track your lookup history for jisho.org",
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
   "content_scripts": [
     {
       "matches": ["*://jisho.org/*"],
       "js": ["script.js"]
     }
   ],
-  "permissions": ["activeTab"],
+  "browser_action": {
+    "default_popup": "popup.html"
+  },
+  "permissions": ["activeTab", "storage"],
   "web_accessible_resources": ["style.css"],
   "manifest_version": 2
 }
