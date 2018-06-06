@@ -2,7 +2,83 @@
 <html>
   <head>
     <style>
+      html, body {
+        margin: 0;
+        padding: 0;
+      }
+      input {
+        font-family: "Helvetica Neue", Helvetica, sans-serif;
+        border: none;
+        outline: none;
+        margin: 10px 8px 0 8px;
+        border-radius: 3px;
+      }
+      .text {
+        color: #494949;
+        font-size: 1.4em;
+        height: 1.8em;
+        padding-left: .7em;
+        border: 2px #dddddd solid;
+        transition: background-color .5s;
+      }
+      .text:hover {
+        background-color: #fcfcfc;
+      }
+      .text:focus {
+        background-color: #f2f2f2;
+      }
+      .register {
+        font-size: 1.1em;
+        background-color: #8abd83;
+        margin: 10px 8px;
+        border-radius: 3px;
+        border: none;
+        outline: none;
+        display: inline-block;
+        height: 1.8em;
+        line-height: 1.8em;
+        text-align: center;
+        width: calc(100% - 7em);
+
+        /* animation taken from hover.css */
+        display: inline-block;
+        vertical-align: middle;
+        -webkit-transform: perspective(1px) translateZ(0);
+        transform: perspective(1px) translateZ(0);
+        box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+        -webkit-transition-duration: 0.3s;
+        transition-duration: 0.3s;
+        -webkit-transition-property: box-shadow;
+        transition-property: box-shadow;
+      }
+      .register:hover, .register:focus {
+        box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+      }
+      .button {
+        font-size: 1.1em;
+        margin-bottom: 10px;
+        background-color: #ecab56;
+        height: 1.8em;
+        float: right;
+        padding: 0 1em;
+        transition: box-shadow .3s;
+
+        /* animation taken from hover.css */
+        display: inline-block;
+        vertical-align: middle;
+        -webkit-transform: perspective(1px) translateZ(0);
+        transform: perspective(1px) translateZ(0);
+        box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+        -webkit-transition-duration: 0.3s;
+        transition-duration: 0.3s;
+        -webkit-transition-property: box-shadow;
+        transition-property: box-shadow;
+      }
+      .button:hover, .button:focus {
+        box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+      }
     </style>
+    <script type="text/javascript" src="popup.js"></script>
   </head>
   <body>
   </body>
