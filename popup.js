@@ -1,8 +1,13 @@
+// Fix bux where popup doesn't show right on mac sometimes
+setTimeout(function(){
+  document.body.clientWidth = '400px';
+},100);
+
 chrome.storage.sync.get(['username'], function(data) {
   if(!data.username) {
     displayLoggedOut();
   } else {
-    displayLoggedIn();
+    displayLoggedIn(username);
   }
 });
 
@@ -48,15 +53,19 @@ function displayLoggedOut() {
   document.getElementsByTagName('body')[0].appendChild(form);
 }
 
-function displayLoggedIn() {
+function displayLoggedIn(username) {
   let loggedInCont = document.createElement('div');
   loggedInCont.setAttribute('id', 'logged-in-cont');
+
+  let welcomeMessage = document.createElement('h6');
+  welcomeMessage.textContent = 'Welcome, ' + username + '!';
 
   let logoutButton = document.createElement('button');
   logoutButton.setAttribute('class', 'logout-button');
   logoutButton.textContent = 'logout';
   logoutButton.onclick = logout;
 
+  loggedInCont.appendChild(welcomeMessage);
   loggedInCont.appendChild(logoutButton);
 
   document.getElementsByTagName('body')[0].appendChild(loggedInCont);
@@ -67,7 +76,7 @@ function login() {
   let body = document.getElementsByTagName('body')[0];
   body.removeChild(form);
 
-  displayLoggedIn();
+  displayLoggedIn("Frank");
 }
 
 function logout() {
