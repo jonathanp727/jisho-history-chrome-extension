@@ -87,7 +87,8 @@ function login() {
   xhr.onreadystatechange = function() {
     if(this.readyState == XMLHttpRequest.DONE && this.status == 200) {
       // Store data
-      chrome.storage.sync.set({username: username, token: this.response.token});
+      const res = JSON.parse(this.response);
+      chrome.storage.sync.set({username: username, token: res.token});
 
       // Remove html elements
       let form = document.getElementsByTagName('form')[0];

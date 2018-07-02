@@ -31,5 +31,20 @@ for (let i = 0; i < entries.length; i++) {
 }
 
 function onClick(content) {
-  console.log("request increment(" + content.trim() + ")");
+  chrome.storage.sync.get(['token'], function(data) {
+    if(!data.token) {
+      alert('Login to use increment feature');
+    } else {
+      let xhr = new XMLHttpRequest();
+      xhr.open('POST', 'http://localhost:3000/api/word', true);
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.setRequestHeader('x-access-token', data.token);
+      xhr.send(JSON.stringify({word: content.trim()}));
+
+      xhr.onreadystatechange = function() {
+        if(this.readyState == XMLHttpRequest.DONE && this.status == 200) {
+        }
+      }
+    }
+  });
 }
