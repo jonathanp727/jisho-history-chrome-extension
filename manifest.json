@@ -15,7 +15,11 @@
   "browser_action": {
     "default_popup": "popup.html"
   },
-  "permissions": ["activeTab", "storage"],
+  "permissions": [
+    "activeTab",
+    "storage",
+    "http://localhost:3000/"
+  ],
   "web_accessible_resources": ["style.css"],
   "manifest_version": 2
 }

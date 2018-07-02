@@ -7,20 +7,21 @@ chrome.storage.sync.get(['username'], function(data) {
   if(!data.username) {
     displayLoggedOut();
   } else {
-    displayLoggedIn(username);
+    displayLoggedIn(data.username);
   }
 });
 
 function displayLoggedOut() {
   let form = document.createElement('form');
   form.setAttribute('method', 'post');
-  form.setAttribute('action', 'onSubmit');
+  //form.setAttribute('action', 'onSubmit');
   form.setAttribute('class', 'available');
 
   let nameInput = document.createElement('input');
   nameInput.setAttribute('type', 'text');
   nameInput.setAttribute('name', 'username');
   nameInput.setAttribute('class', 'text');
+  nameInput.setAttribute('id', 'username');
   nameInput.setAttribute('tabIndex', 1);
   nameInput.setAttribute('autocomplete', 'off');
   //nameInput.setAttribute('value', 'username');
@@ -29,6 +30,7 @@ function displayLoggedOut() {
   passInput.setAttribute('type', 'password');
   passInput.setAttribute('name', 'password');
   passInput.setAttribute('class', 'text');
+  passInput.setAttribute('id', 'password');
   passInput.setAttribute('tabIndex', 2);
   //passInput.setAttribute('value', 'password');
 
@@ -38,7 +40,7 @@ function displayLoggedOut() {
   registerLink.textContent = 'sign up';
 
   let submitButton = document.createElement('input');
-  submitButton.setAttribute('type', 'submit');
+  submitButton.setAttribute('type', 'button');
   submitButton.setAttribute('name', 'submit');
   submitButton.setAttribute('value', 'login');
   submitButton.setAttribute('class', 'button');
@@ -72,14 +74,35 @@ function displayLoggedIn(username) {
 }
 
 function login() {
-  let form = document.getElementsByTagName('form')[0];
-  let body = document.getElementsByTagName('body')[0];
-  body.removeChild(form);
+  const username = document.getElementById('username').value;
+  const password = document.getElementById('password').value;
 
-  displayLoggedIn("Frank");
+  // Handle request
+  let xhr = new XMLHttpRequest();
+  xhr.open('POST', 'http://localhost:3000/api/login', true);
+  xhr.setRequestHeader("Content-Type", "application/json");
+  xhr.send(JSON.stringify({username: username, password: password}));
+
+
+  xhr.onreadystatechange = function() {
+    if(this.readyState == XMLHttpRequest.DONE && this.status == 200) {
+      // Store data
+      chrome.storage.sync.set({username: username, token: this.response.token});
+
+      // Remove html elements
+      let form = document.getElementsByTagName('form')[0];
+      let body = document.getElementsByTagName('body')[0];
+      body.removeChild(form);
+
+      displayLoggedIn(username);
+    }
+  }
 }
 
 function logout() {
+  // Remove data from storage
+  chrome.storage.sync.set({username: null, token: null});
+
   let cont = document.getElementById('logged-in-cont');
   let body = document.getElementsByTagName('body')[0];
   body.removeChild(cont);
