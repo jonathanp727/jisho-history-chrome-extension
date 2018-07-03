@@ -32,12 +32,13 @@ function displayLoggedOut() {
   passInput.setAttribute('class', 'text');
   passInput.setAttribute('id', 'password');
   passInput.setAttribute('tabIndex', 2);
-  //passInput.setAttribute('value', 'password');
 
-  let registerLink = document.createElement('a');
+  let registerLink = document.createElement('input');
+  registerLink.setAttribute('type', 'button');
   registerLink.setAttribute('class', 'register');
   registerLink.setAttribute('tabIndex', 4);
-  registerLink.textContent = 'sign up';
+  registerLink.setAttribute('value', 'sign up');
+  registerLink.onclick = register;
 
   let submitButton = document.createElement('input');
   submitButton.setAttribute('type', 'button');
@@ -109,4 +110,8 @@ function logout() {
   body.removeChild(cont);
 
   displayLoggedOut();
+}
+
+function register() {
+  chrome.tabs.create({url: 'http://localhost:3000'});
 }
