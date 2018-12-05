@@ -1,3 +1,4 @@
+const api = 'https://192.168.1.115:3000';
 let entries = document.getElementsByClassName("concept_light-readings");
 
 // Add css file
@@ -36,7 +37,7 @@ function onClick(content) {
       alert('Login to use increment feature');
     } else {
       let xhr = new XMLHttpRequest();
-      xhr.open('POST', 'http://localhost:3000/api/word', true);
+      xhr.open('POST', `${api}/api/word`, true);
       xhr.setRequestHeader('Content-Type', 'application/json');
       xhr.setRequestHeader('x-access-token', data.token);
       xhr.send(JSON.stringify({word: content.trim()}));

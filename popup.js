@@ -1,3 +1,5 @@
+const api = 'https://192.168.1.115:3000';
+
 // Fix bux where popup doesn't show right on mac sometimes
 setTimeout(function(){
   document.body.clientWidth = '400px';
@@ -80,7 +82,7 @@ function login() {
 
   // Handle request
   let xhr = new XMLHttpRequest();
-  xhr.open('POST', 'http://localhost:3000/api/login', true);
+  xhr.open('POST', `${api}/api/login`, true);
   xhr.setRequestHeader("Content-Type", "application/json");
   xhr.send(JSON.stringify({username: username, password: password}));
 
@@ -89,6 +91,7 @@ function login() {
     if(this.readyState == XMLHttpRequest.DONE && this.status == 200) {
       // Store data
       const res = JSON.parse(this.response);
+      console.log({username: username, token: res.token});
       chrome.storage.sync.set({username: username, token: res.token});
 
       // Remove html elements
@@ -113,5 +116,5 @@ function logout() {
 }
 
 function register() {
-  chrome.tabs.create({url: 'http://localhost:3000'});
+  chrome.tabs.create({url: api});
 }
